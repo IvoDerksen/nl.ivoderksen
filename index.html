@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>ID Design</title>
+	<meta name="description" content="Website of Ivo Derksen, Industrial Designer">
+	<meta name="keywords" content="Design, Graphics, Industrial Designer, Industrial, Design, Engineer">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="jquery-3.2.1.js"></script>
+
+	<script type="text/javascript">
+
+		const listOfImagenames = ['def', 'dream', 'dev'];
+
+		const startscreen = {
+			left: "Welcome to",
+			right: "my website",
+			bg: listOfImagenames[0]
+		}
+
+		const frames = [
+			{
+				left: "I'm Ivo",
+				right: "Derksen",
+				bg: listOfImagenames[0]
+			}, {
+				left: "I ♥",
+				right: "Design",
+				bg: listOfImagenames[0]
+			}, {
+				left: "I",
+				right: "Dream",
+				bg: listOfImagenames[1]
+			}, {
+				left: "I",
+				right: "Develop",
+				bg: listOfImagenames[2]
+			}, {
+				left: "Ideas",
+				right: "Designed",
+				bg: listOfImagenames[0]
+			}, {
+				left: "Industrial",
+				right: "Design",
+				bg: listOfImagenames[0]
+			}, {
+				left: "Interaction",
+				right: "Design",
+				bg: listOfImagenames[0]
+			}, {
+				left: "ID",
+				right: "Design",
+				bg: listOfImagenames[0]
+			}, {
+				left: "For",
+				right: "You",
+				bg: listOfImagenames[0]
+			}
+		]
+
+		var textTimer;
+		var backgroundTimer;
+
+		let index = 0;
+		var duration = 5000;
+
+		const sloganCount = frames.length - 1
+
+		$(document).ready(function () {
+			addOrRemoveClasses('add');
+			$(".left").html(startscreen.left);
+			$(".right").html(startscreen.right);
+			textTimer = window.setInterval(changeText, duration);
+		});
+
+		const addOrRemoveClasses = (add) => {
+			if (add) {
+				$("#change-background").addClass("grey-filter");
+				$(".left").addClass("lefttext");
+				$(".right").addClass("righttext");
+			} else {
+				$("#change-background").removeClass("grey-filter");
+				$(".left").removeClass("lefttext");
+				$(".right").removeClass("righttext");
+			}
+		}
+
+		const changeText = () => {
+			$(".lefttext").html(frames[index].left);
+			$(".righttext").html(frames[index].right);
+			changeBg(index);
+			((index + 1) > sloganCount) ? reset() : index++
+		}
+
+		const reset = () => {
+			index = 0;
+			addOrRemoveClasses()
+			window.clearInterval(textTimer)
+			window.clearInterval(backgroundTimer)
+			addOrRemoveClasses('add')
+			textTimer = window.setInterval(changeText, duration);
+		}
+
+		const changeBg = (i) => {
+			$('#change-background').fadeOut(500, function () {
+				document.getElementById("change-background").style.backgroundImage = `url('assets/${frames[i].bg}.jpg')`;
+				$('#change-background').fadeIn(500)
+			});
+		}
+
+	</script>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+	</style>
+</head>
+
+<body>
+
+	<div id="container">
+		<div id="change-background"></div>
+
+		<div class="logo"></div>
+
+		<div class="box text-box">
+			<p>
+				<span class="left"></span>
+				<span class="right"></span>
+			</p>
+		</div>
+
+	</div>
+
+	<div class="linkedcontainer">
+		<a href="https://www.linkedin.com/in/ivo-derksen-b4b23314b/" class="linkedinlogo">
+		</a>
+	</div>
+
+	<div class="hovereffect"></div>
+
+</body>
+
+</html>
